@@ -10,6 +10,8 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
+    # viewでも使えるようにインスタンス変数にする
+    @article = Article.find(params[:id])
   end
 
   # GET /articles/new
@@ -19,12 +21,21 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+     @article = Article.find(params[:id])
   end
 
   # POST /articles
   # POST /articles.json
   def create
     @article = Article.new(article_params)
+    # @article = Article.new(params.require(:article).permit(:title, :description))
+    # if @article.save
+    # 保存できたら記事のパスにリダイレクト
+    #   redirect_to @article
+    # else
+    # 保存出来なかったら現在のページ(new)に止まる
+    #   render "new"
+    # end
 
     respond_to do |format|
       if @article.save
@@ -40,6 +51,8 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
+    # これでデフォルト値を入れてる？
+    # @article.update(params.require(:article).permit(:title, :description))
     respond_to do |format|
       if @article.update(article_params)
         format.html { redirect_to @article, notice: 'Article was successfully updated.' }
