@@ -11,7 +11,6 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     # viewでも使えるようにインスタンス変数にする
-    @article = Article.find(params[:id])
   end
 
   # GET /articles/new
@@ -21,12 +20,12 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
-     @article = Article.find(params[:id])
   end
 
   # POST /articles
   # POST /articles.json
   def create
+    # article_paramsはprivateで定義している
     @article = Article.new(article_params)
     # @article = Article.new(params.require(:article).permit(:title, :description))
     # if @article.save
