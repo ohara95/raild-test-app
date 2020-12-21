@@ -27,9 +27,11 @@ class ArticlesController < ApplicationController
   def create
     # article_paramsはprivateで定義している
     @article = Article.new(article_params)
+    @article.user = User.first
     # @article = Article.new(params.require(:article).permit(:title, :description))
     # if @article.save
     # 保存できたら記事のパスにリダイレクト
+    # flash[:notice] = "seccess!"
     #   redirect_to @article
     # else
     # 保存出来なかったら現在のページ(new)に止まる
