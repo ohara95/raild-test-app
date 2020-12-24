@@ -1,4 +1,8 @@
-  <h1 class="text-center mt-4">blog's</h1>
+<h1 class="text-center mt-4">Alpha Bloggers</h1>
+
+<div class="flickr_pagination">
+  <%= will_paginate @users, :container => false %>
+</div>
 
 <div class="container">
   <% @users.each do |user| %>
@@ -12,9 +16,13 @@
             <h5 class="card-title">
               <%= link_to gravatar_for(user, size: 150), user %>
             </h5>
-            <p class="card-text"><%= pluralize(user.articles.count, "articles") %></p>
-            <%= link_to "view profile", user, class: "btn btn-outline-success" %>
-            <%= link_to "edit profile", edit_user_path(user), class: "btn btn-outline-success" %>
+            <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
+            <%= link_to "View profile", user, class: "btn btn-outline-success" %>
+            <% if logged_in? %>
+              <% if user == current_user %>
+                <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
+              <% end %>
+            <% end %>
           </div>
           <div class="card-footer text-muted">
             <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
@@ -23,4 +31,8 @@
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="flickr_pagination mb-4">
+  <%= will_paginate @articles, :container => false %>
 </div>

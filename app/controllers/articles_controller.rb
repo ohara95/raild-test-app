@@ -4,13 +4,12 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
-    # viewでも使えるようにインスタンス変数にする
   end
 
   # GET /articles/new
@@ -27,7 +26,7 @@ class ArticlesController < ApplicationController
   def create
     # article_paramsはprivateで定義している
     @article = Article.new(article_params)
-    @article.user = User.first
+    @article.user = current_user
     # @article = Article.new(params.require(:article).permit(:title, :description))
     # if @article.save
     # 保存できたら記事のパスにリダイレクト
@@ -76,7 +75,7 @@ class ArticlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # viewでも使えるようにインスタンス変数にする
     def set_article
       @article = Article.find(params[:id])
     end
