@@ -1,5 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:index, :show]
+  before_action :require_same_user, only: [:edit, :delete, :update]
 
   # GET /articles
   # GET /articles.json
@@ -80,8 +82,15 @@ class ArticlesController < ApplicationController
       @article = Article.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def article_params
       params.require(:article).permit(:title, :description)
+    end
+
+    # ログインユーザーと記事のユーザーが異なる場合に弾く
+    def require_same_user
+      if current_user != @article.user && !current_user.admin?
+        flash[:alert] = "自分の記事のみを編集または削除できます"  
+        redirect_to @article
+      end
     end
 end

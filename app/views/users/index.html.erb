@@ -22,6 +22,9 @@
               <% if user == current_user %>
                 <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
               <% end %>
+              <% if current_user.admin? %>
+                <%= link_to "delete profile", user_path(user), class: "btn btn-outline-danger", method: :delete, data:{confirm:"ユーザーアカウントと関連するすべての記事を削除してもよろしいですか？"}%>
+              <% end %>
             <% end %>
           </div>
           <div class="card-footer text-muted">
