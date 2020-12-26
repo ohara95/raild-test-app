@@ -1,3 +1,4 @@
+# ここに書いたメソッドはcontroller全体で使える
 class ApplicationController < ActionController::Base
 
   # これを書くとviewでも使えるようになる

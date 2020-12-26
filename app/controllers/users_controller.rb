@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   def update 
     if @user.update(user_params)
-      flash[:notice] = "update sucsess"
+      flash[:notice] = "更新成功！"
       redirect_to @user
     else
     render "edit"
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      flash[:notice] = 'succsess'
+      flash[:notice] = '成功！'
       redirect_to articles_path
     else
       render "new"
@@ -66,4 +66,5 @@ class UsersController < ApplicationController
       redirect_to @user
     end
   end
+  
 end

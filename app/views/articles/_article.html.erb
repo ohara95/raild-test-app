@@ -1,3 +1,4 @@
+<!-- 一覧の記事部分 -->
 <div class="container">
   <% @articles.each do |article| %>
     <div class="row justify-content-md-center">
@@ -5,22 +6,22 @@
         <div class="card text-center shadow mb-5 bg-white rounded">
           <div class="card-header font-italic">
             <% if article.user %>
-              by <%= link_to article.user.username, user_path(article.user) %>
+              投稿者:<%= link_to article.user.username, user_path(article.user) %>
             <% end %>
           </div>
           <div class="card-body">
             <h5 class="card-title"><%= link_to article.title, article_path(article), class: "text-success" %></h5>
             <p class="card-text"><%= truncate(article.description, length: 100) %></p>
-            <%= link_to "View", article_path(article), class: "btn btn-outline-success" %>
+            <%= link_to "閲覧", article_path(article), class: "btn btn-outline-success" %>
             <% if logged_in? && (article.user == current_user || current_user.admin?) %>
-              <%= link_to "Edit", edit_article_path(article), class: "btn btn-outline-info" %>
-              <%= link_to "Delete", article_path(article), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+              <%= link_to "編集", edit_article_path(article), class: "btn btn-outline-info" %>
+              <%= link_to "削除", article_path(article), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
             <% end %>
 
           </div>
           <div class="card-footer text-muted">
-            <small>Created <%= time_ago_in_words(article.created_at) %> ago, 
-            edited <%= time_ago_in_words(article.updated_at) %> ago</small>
+            <small>作成 <%= time_ago_in_words(article.created_at) %> 前, 
+            編集 <%= time_ago_in_words(article.updated_at) %> 前</small>
           </div>
         </div>
       </div>
