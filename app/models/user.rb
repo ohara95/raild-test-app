@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   before_save {self.email= email.downcase}
+
+  # dependent -> オブジェクトのオーナーがdestroyされたときの、それに関連付けられたオブジェクトの扱いを制御
   has_many :articles, dependent: :destroy
   validates :username , presence: true,
              uniqueness:{case_sensitive:false},

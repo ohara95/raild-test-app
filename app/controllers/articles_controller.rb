@@ -79,7 +79,8 @@ class ArticlesController < ApplicationController
     def article_params
       # paramsはクライアントが送信したデータ
       # articleのtitleとdescriptionのみ受け取る(更新を許可) -> セキュリティ対策
-      params.require(:article).permit(:title, :description)
+      # memo category_ids:[]と:category_ids[]の違いは？
+      params.require(:article).permit(:title, :description, category_ids:[])
     end
 
     # ログインユーザーと記事のユーザーが異なる場合に弾く

@@ -1,5 +1,6 @@
 require "test_helper"
 
+# アプリを構成するライブラリ(主にモデル)が、正しく動作するかをチェック -> 単体テスト
 # assert -> 有効
 # テストに付随するバリデーション必要(model)
 class CategoryTest < ActiveSupport::TestCase
@@ -20,7 +21,7 @@ class CategoryTest < ActiveSupport::TestCase
     # @category = Category.new(name:"")
     # 上と同じ意味 setupに書いたから短く書ける
     @category.name = ""
-    # 有効かどうかチェック
+    # valid?メソッドで有効かどうかチェック
     assert_not @category.valid?
   end
 

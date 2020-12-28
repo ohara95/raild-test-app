@@ -15,11 +15,22 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <% if logged_in? %>
-              <%= link_to "Create new article", new_article_path, class: "dropdown-item" %>
+              <%= link_to "新規作成", new_article_path, class: "dropdown-item" %>
             <% end %>
-            <%= link_to "View articles", articles_path, class: "dropdown-item" %>
+            <%= link_to "一覧表示", articles_path, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" href="#">その他</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categories
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if logged_in? && current_user.admin? %>
+              <%= link_to "新規作成", new_category_path, class: "dropdown-item" %>
+            <% end %>
+            <%= link_to "一覧表示", categories_path, class: "dropdown-item" %>
           </div>
         </li>
         <% if logged_in? %>
