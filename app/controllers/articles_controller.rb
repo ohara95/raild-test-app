@@ -72,6 +72,7 @@ class ArticlesController < ApplicationController
   private
     # viewでも使えるようにインスタンス変数にする
     def set_article
+      # レコード毎の表示画面を動的に生成(atricles/:id) 
       @article = Article.find(params[:id])
     end
 

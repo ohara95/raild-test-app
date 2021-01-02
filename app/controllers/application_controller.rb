@@ -21,6 +21,7 @@ class ApplicationController < ActionController::Base
   def require_user
     if !logged_in?
       flash[:alert] = "アクションを実行するには、ログインする必要があります"
+      # render "session/new"でもいいっぽい？
       redirect_to login_path
     end
   end

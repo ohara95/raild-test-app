@@ -12,6 +12,11 @@
 
 ActiveRecord::Schema.define(version: 2020_12_28_072112) do
 
+  # create_tableはテーブルの新規作成メソッド
+  # t.timestampsという記述はテーブルにcreated_atとupdated_atというカラムを作成してくれる
+  
+  # article_categories -> テーブル名のシンボル
+  # article_id -> カラム名のシンボル
   create_table "article_categories", force: :cascade do |t|
     t.integer "article_id"
     t.integer "category_id"
